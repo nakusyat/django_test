@@ -14,6 +14,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                {% if employees %}
                     {% for item in employees %}
                         <tr>
                             <td>{{item.first_name}}</td>
@@ -24,12 +25,17 @@
                         </td>
                         </tr>
                     {% endfor %}
+                {% else %}
+                        <tr>
+                            <td>Пустой список</td>
+                        </tr>
+                {% endif %}
                 </tbody>
             </table>
         </div>
         <div class="col s3">
             <div>
-                <a class="btn-floating btn-medium waves-effect waves-light red" href="/timeline/employee/add"><i class="material-icons">add</i></a>
+                <a class="btn-floating btn-medium waves-effect waves-light red" href="{%url 'timeline:create_employee'%}"><i class="material-icons">add</i></a>
                 <span class="add_emp">Добавить сотрудника</span>
             </div>
             <div class="search right">

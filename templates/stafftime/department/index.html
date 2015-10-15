@@ -11,11 +11,20 @@
                     </tr>
                 </thead>
                 <tbody>
+                {% if departments %}
                     {% for item in departments %}
                         <tr>
                            <td>{{item.name}} <a class="delete right" href="{%url 'timeline:delete_department' item.id %}"><i class="material-icons">delete</i></a> <a class="right" href="{%url 'timeline:edit_department' item.id %}"><i class="material-icons">edit</i></a></td>
                         </tr>
                     {% endfor %}
+                {%else%}
+                    <tr>
+                        <td>
+                        Пустой список
+                        </td>
+                    </tr>
+
+                {% endif %}
                 </tbody>
             </table>
             <div class="pagination">

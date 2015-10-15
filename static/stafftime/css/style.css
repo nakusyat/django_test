@@ -54,7 +54,12 @@
 
 .department, .employee, .schedule
 {
-    margin-top: 50px;
+    margin-top: 20px;
+}
+
+.block_body
+{
+    margin-top: 30px;
 }
 
 .data_search_btn

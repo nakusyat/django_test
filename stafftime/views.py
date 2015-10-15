@@ -268,7 +268,7 @@ class EmployeeAttendanceReportView(View):
                 date_search = response_data['form'].cleaned_data['report_date_search']
                 response_data['month'] = date_search.strftime('%B')
                 department_id = request.POST['department']
-                response_data['late_employees'] = EmployeeAttendance.objects.filter(employee__department__timeline__start_time__isnull=False, employee__department__exact=department_id, current_day__month=date_search.month).extra(where=['"stafftime_employeeattendance"."arriving_time" > "stafftime_timeline"."start_time"'])
+                response_data['late_employees'] = EmployeeAttendance.objects.filter(employee__department__timeline__start_time__isnull=False, employee__department__exact=department_id, current_day__month=date_search.month, current_day__year=date_search.year).extra(where=['"stafftime_employeeattendance"."arriving_time" > "stafftime_timeline"."start_time"'])
 
         return render(request, self.template_dir,
               response_data)

@@ -40,7 +40,6 @@ INSTALLED_APPS = (
     'polls',
     'smt',
     'stafftime',
-    'widget_tweaks',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -1,0 +1,17 @@
+#trnsz	tstsz	iter	model	trn-pp		test-pp		trn-vit-pp		tst-vit-pp
+308	0	0	Model1	1546.86		N/A		23561.7		N/A
+308	0	1	Model1	34.5915		N/A		241.208		N/A
+308	0	2	Model1	29.4418		N/A		159.123		N/A
+308	0	3	Model1	26.6789		N/A		118.539		N/A
+308	0	4	Model1	25.1848		N/A		98.7151		N/A
+308	0	5	ST2To3	1.5972e+07		N/A		inf		N/A
+308	0	6	Model3	66.4982		N/A		83.0609		N/A
+308	0	7	Model3	12.6446		N/A		13.6426		N/A
+308	0	8	Model3	10.1365		N/A		10.7629		N/A
+308	0	9	Model3	8.99829		N/A		9.43937		N/A
+308	0	10	Model3	8.35233		N/A		8.69531		N/A
+308	0	11	T3To4	7.88272		N/A		8.16477		N/A
+308	0	12	Model4	25.8281		N/A		26.7518		N/A
+308	0	13	Model4	21.4781		N/A		22.1088		N/A
+308	0	14	Model4	19.0769		N/A		19.6227		N/A
+308	0	15	Model4	17.3384		N/A		17.7952		N/A

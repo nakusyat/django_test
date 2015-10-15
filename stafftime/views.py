@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import View
 from .models import Employee, Timeline, EmployeeAttendance
 from .models import Department
-from .forms import EmployeeForm, TimelineForm, SearchForm, EmployeeAttendanceForm, DateSearchForm, \
+from .forms import EmployeeForm, TimelineForm, SearchForm, EmployeeAttendanceForm, DateSearchForm,\
     AttendanceReportSearchForm
 from .forms import DepartmentForm
 

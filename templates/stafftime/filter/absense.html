@@ -15,6 +15,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                    {% if late_employee %}
                         {% for item in late_employee %}
                             <tr>
                                 <td>{{item.employee}}</td>
@@ -26,6 +27,11 @@
                             </td>
                             </tr>
                         {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td>Пустой список</td>
+                        </tr>
+                    {% endif %}
                     </tbody>
                 </table>
             {% endif %}

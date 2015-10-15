@@ -35,7 +35,7 @@ class IBMModelOptions(forms.Form):
     ('5', 'IBM5'),
     ('6', 'IBM6'), )
 
-    models = forms.MultipleChoiceField(widget=MySelect, choices=options)
+    models = forms.MultipleChoiceField(widget=MySelect, choices=options, initial=options[0])
 
     def get_html_input_dict(self, query_dict, param):
         import re

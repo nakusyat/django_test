@@ -5,7 +5,6 @@ from django import forms
 from django.forms.extras import SelectDateWidget
 from .models import Employee, Timeline, EmployeeAttendance, DateSearch
 from .models import Department
-from datetimewidget.widgets import DateTimeWidget
 
 
 class DepartmentForm(ModelForm):

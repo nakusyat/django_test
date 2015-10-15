@@ -29,6 +29,6 @@ urlpatterns = patterns('',
     url(r'^empatt/(?P<empatt_id>.*)/delete$', DeleteEmployeeAttendanceView.as_view(), name='delete_empatt'),
     url(r'^empatt/(?P<empatt_type>.*)/all', EmployeeAttendanceView.as_view(), name='empatt'),
     url(r'^report', EmployeeAttendanceReportView.as_view(), name='report'),
-    url(r'^$', IndexView.as_view(), name='home'),
+    url(r'^$', EmployeeView.as_view(), name='home'),
 )
 

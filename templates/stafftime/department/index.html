@@ -1,0 +1,41 @@
+{% extends 'stafftime/base.html' %}
+
+{% block body %}
+    <div class="row department">
+        <div class="col s9 white">
+            <table class="list_dep">
+                <caption>Список отделений</caption>
+                <thead>
+                    <tr>
+                        <th>Название</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in departments %}
+                        <tr>
+                           <td>{{item.name}} <a class="delete right" href="{%url 'timeline:delete_department' item.id %}"><i class="material-icons">delete</i></a> <a class="right" href="{%url 'timeline:edit_department' item.id %}"><i class="material-icons">edit</i></a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="pagination">
+                <span class="step-links">
+                    {% if departments.has_previous %}
+                        <a href="?page={{ departments.previous_page_number }}">Пред.</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Страница {{ departments.number }} из {{ departments.paginator.num_pages }}.
+                    </span>
+
+                    {% if departments.has_next %}
+                        <a href="?page={{ departments.next_page_number }}">След.</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+        <div class="col s3">
+            <a class="btn-floating btn-medium waves-effect waves-light red" href="{%url 'timeline:create_department'%}"><i class="material-icons">add</i></a><span class="add_emp">Добавить отделение</span>
+        </div>
+    </div>
+{% endblock %}

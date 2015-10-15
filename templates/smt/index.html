@@ -1,0 +1,36 @@
+{% extends 'smt/base.html' %}
+
+{% block main %}
+    <div class="row white" style="border-radius: 2px;">
+        <div class="col s9">
+            <p class="medium">Uploaded files</p>
+            {% if files %}
+                <form action="{% url 'smt:tokenize' %}" method="post">
+                    {% csrf_token %}
+                    <ul class="collection">
+                        {% for name in files %}
+                        <li class="collection-item">
+                            <input type="checkbox" name="files" id="{{forloop.counter}}" value="{{name}}" />
+                            <label for="{{forloop.counter}}">{{name}}</label>
+                            <a href="/smt/{{ name }}/delete" class="delete right"><i class="tiny material-icons">delete</i></a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <input class="waves-effect waves-light btn indigo lighten-3" type="submit" value="Tokenize" name="tokenize">
+                </form>
+            {%else%}
+                <p>No files found</p>
+            {% endif %}
+        </div>
+        <div class="col s3">
+            <div class="smt_upload_container green lighten-5">
+                <p>* Upload new files to tokenize</p>
+                <form action="{% url 'smt:home' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.file }}
+                <input class="smt_upload waves-effect waves-light btn indigo lighten-3" type="submit" value="Upload" name="upload">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

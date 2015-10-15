@@ -1,0 +1,61 @@
+.smt_main
+{
+    margin-top: 20px;
+}
+.smt_upload_container
+{
+    padding: 10px;
+    margin: 10px auto;
+}
+.smt_upload
+{
+    margin-top: 20px;
+}
+.group_cont
+{
+    display: inline;
+    margin-right: 10px;
+}
+.group_cont span
+{
+    vertical-align: top;
+    margin-right: 10px;
+}
+
+.delete
+{
+    margin-top: 5px;
+}
+
+.smt_tokenize ul
+{
+    display: inline-block;
+    vertical-align: top;
+}
+
+.smt_tokenize ul.collection
+{
+    width: 650px
+}
+
+.smt_tokenize #id_models
+{
+    width: 320px;
+    text-align: center;
+    padding: 8px;
+    margin: 0;
+}
+
+#id_models li
+{
+    width: 90px;
+    display: inline-block;
+    margin: 0 20px 10px 0;
+    background-color: #e8f5e9;
+    padding: 10px;
+}
+
+#id_models li input
+{
+    margin: 0;
+}

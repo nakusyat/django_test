@@ -1,0 +1,23 @@
+{% extends 'stafftime/base.html' %}
+{% load widget_tweaks %}
+
+{% block body %}
+    <div class="row create_emp">
+        <div class="col s10 white">
+            <p>Новое посещение</p>
+            <form action="{% url 'timeline:create_empatt' %}" method="post">
+            {% csrf_token %}
+                {{form}}
+                <br>
+                <button type="submit">Добавить запись</button>
+            </form>
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li class="{{message.tags}} green-text"> {{message}}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

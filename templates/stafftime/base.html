@@ -1,0 +1,33 @@
+{% load widget_tweaks %}
+{% load static  %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'smt/css/materialize.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'stafftime/css/style.css' %}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script type="text/javascript" src="{% static 'smt/js/jquery/jquery-1.8.0.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'smt/js/materialize.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'stafftime/js/main.js' %}"></script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>SMT-Toolkit</title>
+</head>
+<body class="green lighten-5">
+    <div class="row">
+        <div class="col s2">
+            {% block sidebar %}
+                <ul class="timeline collection">
+                  <li class="collection-item"><a href="{%url 'timeline:empatt' 'employee'%}">Посещение сотрудников</a><i class="material-icons right">perm_contact_calendar</i></li>
+                  <li class="collection-item"><a href="{%url 'timeline:timeline' 'department'%}">Расписание</a><i class="material-icons right">av_timer</i></li>
+                  <li class="collection-item"><a href="{%url 'timeline:emp' 'first_name' %}">Сотрудники</a><i class="material-icons right">perm_identity</i></li>
+                  <li class="collection-item"><a href="{%url 'timeline:dep' %}">Отделения</a><i class="material-icons right">work</i></li>
+                  <li class="collection-item"><a href="{%url 'timeline:report' %}">Месячный отчет</a><i class="material-icons right">description</i></li>
+                </ul>
+            {% endblock %}
+        </div>
+        <div class="col s10">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </div>
+</body>

@@ -1,0 +1,44 @@
+{% extends 'stafftime/base.html' %}
+
+{% block body %}
+    <div class="row employee">
+        <div class="col s9 white">
+            <table class="list_emp">
+                <caption>Список сотрудников</caption>
+                <thead>
+                    <tr>
+                        <th><a href="{% url 'timeline:emp' 'first_name' %}">Имя</a></th>
+                        <th><a href="{% url 'timeline:emp' 'second_name' %}">Фамилия</a></th>
+                        <th><a href="{% url 'timeline:emp' 'hire_date'%}">Дата наема</a></th>
+                        <th><a href="{% url 'timeline:emp' 'department'%}">Отделение</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in employees %}
+                        <tr>
+                            <td>{{item.first_name}}</td>
+                            <td>{{item.second_name}}</td>
+                            <td>{{item.hire_date}}</td>
+                            <td>{{item.department}}
+                            <a class="delete right" href="{%url 'timeline:delete_employee' item.id %}"><i class="material-icons">delete</i></a><a class="right" href="{%url 'timeline:edit_employee' item.id %}"><i class="material-icons">edit</i></a>
+                        </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col s3">
+            <div>
+                <a class="btn-floating btn-medium waves-effect waves-light red" href="/timeline/employee/add"><i class="material-icons">add</i></a>
+                <span class="add_emp">Добавить сотрудника</span>
+            </div>
+            <div class="search right">
+                <form action="{% url 'timeline:search_employee'%}" method="post">
+                    {% csrf_token %}
+                    <div id="id_criteria_value_cont">{{form.criteria_value.label}}{{form.criteria_value}}</div>
+                    <button type="submit">Найти</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'smt/base.html' %}
+
+{% block main %}
+    <div class="row white" style="border-radius: 2px;">
+        <div class="col 9">
+            <h5>Aligned files</h5>
+            {% if aligned_files %}
+                <ol class="collection">
+                    {% for name in aligned_files %}
+                    <li class="collection-item">
+                        <a href="/smt/{{ name }}"> {{name}} </a>
+                        <a href="/smt/{{ name }}/delete" class="delete right"><i class="tiny material-icons">delete</i></a>
+                    </li>
+                    {% endfor %}
+                </ol>
+            {%else%}
+                <p>No files found</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

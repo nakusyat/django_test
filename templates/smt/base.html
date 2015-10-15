@@ -1,0 +1,48 @@
+{% load widget_tweaks %}
+{% load static  %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'smt/css/materialize.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'smt/css/style.css' %}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script type="text/javascript" src="{% static 'smt/js/jquery/jquery-1.8.0.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'smt/js/main.js' %}"></script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>SMT-Toolkit</title>
+</head>
+{% block navbar %}
+<nav>
+    <div class="nav-wrapper  teal darken-2">
+        <div class="row">
+            <img class="circle responsive-img" style="width: 50px; margin: 5px 10px" src="{% static 'smt/image/toolkit-icon.png' %}">
+            <a href="{% url 'smt:home' %}" class="brand-logo">SMT Toolkit</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+              <li><a href="{% url 'smt:home' %}">Text process</a></li>
+              <li><a href="{% url 'smt:home' %}">Text alignment</a></li>
+              <li><a href="#">Translator</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+<body class="green lighten-5">
+    {% block body %}
+        <div class="row">
+        <div class="col s2">
+            <div class="collection" style="border-radius: 4px; margin-top: 15px;">
+                <a href="{% url 'smt:home'%}"class="collection-item{% url 'smt:home' as the_url%}{% if request.get_full_path = the_url %} active{% endif %}">Uploaded<span class="right">2</span></a>
+                <a href="{% url 'smt:tokenize'%}" class="collection-item{% url 'smt:tokenize' as the_url %}{% if request.get_full_path = the_url %} active{% endif %}">Tokenized<span class="right">2</span></a>
+                <a href="{% url 'smt:vcb'%}" class="collection-item{% url 'smt:vcb' as the_url %}{% if request.get_full_path = the_url %} active{% endif %}">.vcb and .snt<span class="right">2</span></a>
+                <a href="{% url 'smt:wc'%}" class="collection-item{% url 'smt:wc' as the_url %}{% if request.get_full_path = the_url %} active{% endif %}">.classes and .cooc<span class="right">2</span></a>
+                <a href="{% url 'smt:align'%}" class="collection-item{% url 'smt:align' as the_url %}{% if request.get_full_path = the_url %} active{% endif %}">IBM * models<span class="right">2</span></a>
+            </div>
+        </div>
+            <div class="smt_main col s10">
+                {% block main %}
+
+                {% endblock %}
+            </div>
+        </div>
+    {% endblock %}
+</body>

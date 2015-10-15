@@ -1,0 +1,34 @@
+{% extends 'stafftime/base.html' %}
+
+{% block body %}
+    <div class="row schedule">
+        <div class="col s9 white">
+            <table class="list_emp">
+                <caption>Список расписаний</caption>
+                <thead>
+                    <tr>
+                        <th><a href="{% url 'timeline:emp' 'first_name' %}">Отделение</a></th>
+                        <th><a href="{% url 'timeline:emp' 'second_name' %}">Вид смены</a></th>
+                        <th><a href="{% url 'timeline:emp' 'hire_date'%}">Время начала</a></th>
+                        <th><a href="{% url 'timeline:emp' 'department'%}">Время завершения</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in timelines %}
+                        <tr>
+                            <td>{{item.department}}</td>
+                            <td>{{item.turn}}</td>
+                            <td>{{item.start_time}}</td>
+                            <td>{{item.end_time}}
+                            <a class="delete right" href="{%url 'timeline:delete_timeline' item.id %}"><i class="material-icons">delete</i></a><a class="right" href="{%url 'timeline:edit_timeline' item.id %}"><i class="material-icons">edit</i></a>
+                        </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col s3">
+            <a class="btn-floating btn-medium waves-effect waves-light red" href="{%url 'timeline:create_timeline'%}"><i class="material-icons">add</i></a><span class="add_emp">Добавить расписание</span>
+        </div>
+    </div>
+{% endblock %}

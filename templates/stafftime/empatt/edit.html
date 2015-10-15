@@ -1,0 +1,22 @@
+{% extends 'stafftime/base.html' %}
+
+{% block body %}
+    <div class="row edit_emp">
+        <div class="col s10 white">
+            <p>Редактирование сотрудника</p>
+            <form action="{% url 'timeline:edit_empatt' empatt_id %}" method="post">
+            {% csrf_token %}
+                {{form}}
+                <br>
+                <button type="submit">Изменить сотрудника</button>
+            </form>
+           {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li class="{{message.tags}} green-text"> {{message}}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'smt/base.html' %}
+
+{% block main %}
+    <div class="row white" style="border-radius: 2px;">
+        <div class="col 9">
+            <h5>Tokenized files</h5>
+            <p>Specify source-target files and IBM alignment models to make GIZA++ word alignment</p>
+            {% if tokenized_files %}
+                <form action="{% url 'smt:align' %}" method="post" name="word_align">
+                    {% csrf_token %}
+                    <div class="smt_tokenize">
+                    <ul class="collection">
+                        {% for name in tokenized_files %}
+                            <li class="collection-item">
+                                <div class="group_cont">
+                                    <span>
+                                    <input name="source" type="radio" value="{{name}}" id="source_{{forloop.counter}}" />
+                                    <label for="source_{{forloop.counter}}">Source</label>
+                                    </span>
+                                    <span>
+                                    <input name="target" type="radio" value="{{name}}" id="target_{{forloop.counter}}" />
+                                    <label for="target_{{forloop.counter}}">Target</label>
+                                    </span>
+                                </div>
+                                <a href="/smt/{{ name }}"> {{name}} </a>
+                                <a href="/smt/{{ name }}/delete" class="delete right"><i class="tiny material-icons">delete</i></a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {{ form_models.models }}
+                    </div>
+                    <input class="waves-effect waves-light btn indigo lighten-3" type="submit" value="Start alignment" name="align">
+                </form>
+            {%else%}
+                <p>No files found</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

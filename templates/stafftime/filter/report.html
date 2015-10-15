@@ -1,0 +1,41 @@
+{% extends 'stafftime/base.html' %}
+
+{% block body %}
+    <div class="row employee">
+        <div class="col s9 white">
+
+            <table class="list_emp">
+                <caption>Список опоздавших сотрудников {% if month %}на {{month}} {%endif%}</caption>
+                <thead>
+                    <tr>
+                        <th><a href="{% url 'timeline:empatt' 'employee' %}">Сотрудник</a></th>
+                        <th><a href="{% url 'timeline:empatt' 'arriving_time' %}">Дата прихода</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if late_employees %}
+                        {% for item in late_employees %}
+                            <tr>
+                                <td>{{item.employee}}</td>
+                                <td>{{item.arriving_time}}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td>Пустой список</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col s3">
+            <div class="search right">
+                <form action="{% url 'timeline:report'%}" method="post">
+                    {% csrf_token %}
+                    {{form}}
+                    <br><button class="data_search_btn" type="submit">Посмотреть</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

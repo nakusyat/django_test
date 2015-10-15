@@ -1,0 +1,71 @@
+{% extends 'stafftime/base.html' %}
+
+{% block body %}
+    <div class="row employee">
+        <div class="col s9 white">
+            {% if criteria_type == 'late'%}
+                <table class="list_emp">
+                    <caption>Опоздавшие сотрудники на {{criteria_type_date}}</caption>
+                    <thead>
+                        <tr>
+                            <th><a href="{% url 'timeline:empatt' 'employee' %}">Сотрудник</a></th>
+                            <th><a href="{% url 'timeline:empatt' 'arriving_time' %}">Дата прихода</a></th>
+                            <th><a href="{% url 'timeline:empatt' 'leaving_time'%}">Дата ухода</a></th>
+                            <th><a href="{% url 'timeline:empatt' 'current_day'%}">День</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in late_employee %}
+                            <tr>
+                                <td>{{item.employee}}</td>
+                                <td>{{item.arriving_time}}</td>
+                                <td>{{item.leaving_time}}
+                                <td>{{item.current_day}}
+                                <a class="delete right" href="{%url 'timeline:delete_empatt' item.id %}"><i class="material-icons">delete</i></a><a class="right" href="{%url 'timeline:edit_empatt' item.id %}"><i class="material-icons">edit</i></a>
+                                </td>
+                            </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+            {% if criteria_type == 'absense' %}
+                <table class="list_emp">
+                    <caption>Отсутствующие сотрудники на {{criteria_type_date}}</caption>
+                    <thead>
+                        <tr>
+                            <th>Сотрудник</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if absent_employee %}
+                            {% for item in absent_employee %}
+                                <tr>
+                                    <td>{{item}}</td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td>Нет записей</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            {% endif %}
+
+        </div>
+        <div class="col s3">
+            <div>
+                <a class="btn-floating btn-medium waves-effect waves-light red" href="{%url 'timeline:create_empatt'%}"><i class="material-icons">add</i></a>
+                <span class="add_emp">Добавить запись</span>
+            </div>
+            <div class="search right">
+                <form action="{% url 'timeline:search_by_filter'%}" method="post">
+                    {% csrf_token %}
+                    {{form}}
+                    <br><button class="data_search_btn" type="submit">Посмотреть</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

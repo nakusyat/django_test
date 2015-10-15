@@ -1,0 +1,63 @@
+.add_emp
+{
+    margin-left: 5px;
+}
+
+#id_department,
+#id_department_search,
+#id_criterias,
+#id_employee
+{
+    display: block!important;
+}
+
+#id_date_search_month,
+#id_date_search_day,
+#id_date_search_year,
+#id_attendance_type,
+#id_report_date_search_month,
+#id_report_date_search_year
+{
+    display: inline-block!important;
+}
+.search
+{
+    margin-top: 30px;
+
+}
+
+.timeline.collection
+{
+    margin-top: 90px;
+}
+
+.timeline i
+{
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.delete
+{
+    margin-left: 5px;
+}
+
+.edit_dep, .edit_emp, .create_dep, .create_emp
+{
+    margin-top: 60px;
+}
+
+.list_emp, .list_dep
+{
+    margin: 25px 0 20px 0;
+}
+
+.department, .employee, .schedule
+{
+    margin-top: 50px;
+}
+
+.data_search_btn
+{
+    margin-top: 10px;
+}

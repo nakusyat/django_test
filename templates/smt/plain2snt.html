@@ -1,0 +1,21 @@
+{% extends 'smt/base.html' %}
+
+{% block main %}
+    <div class="row white" style="border-radius: 2px;">
+        <div class="col 9">
+            <h5>Plain to snt files</h5>
+            {% if plain2snt_files %}
+                <ul class="collection">
+                    {% for name in plain2snt_files %}
+                    <li class="collection-item">
+                        <a href="/smt/{{ name }}"> {{name}} </a>
+                        <a href="/smt/{{ name }}/delete" class="delete right"><i class="tiny material-icons">delete</i></a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {%else%}
+                <p>No files found</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

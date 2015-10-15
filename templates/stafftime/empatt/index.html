@@ -2,6 +2,7 @@
 
 {% block body %}
     <div class="row employee">
+        <div class="right"><a href="{% url 'smt:home'%}">SMT Toolkit</a></div>
         <div class="col s9 white">
             <table class="list_emp">
                 <caption>Учет посещений сотрудников</caption>
@@ -49,6 +50,7 @@
                 </span>
             </div>
         </div>
+
         <div class="col s3">
             <div>
                 <a class="btn-floating btn-medium waves-effect waves-light red" href="{%url 'timeline:create_empatt'%}"><i class="material-icons">add</i></a>

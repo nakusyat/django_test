@@ -3,27 +3,13 @@ from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.shortcuts import render, render_to_response, redirect
-from django.template import RequestContext
-from datetime import date, timedelta, datetime
+from django.shortcuts import render, redirect
 from django.views.generic import View
 from .models import Employee, Timeline, EmployeeAttendance
 from .models import Department
 from .forms import EmployeeForm, TimelineForm, SearchForm, EmployeeAttendanceForm, DateSearchForm, \
     AttendanceReportSearchForm
 from .forms import DepartmentForm
-
-
-class IndexView(View):
-
-    template_dir = "stafftime/index.html"
-
-    def dispatch(self, request, *args, **kwargs):
-
-        return render_to_response(self.template_dir,
-            {
-                'test':'index'
-            }, RequestContext(request))
 
 
 class DepartmentView(View):
@@ -41,10 +27,10 @@ class DepartmentView(View):
             departments = paginator.page(1)
         except EmptyPage:
             departments = paginator.page(paginator.num_pages)
-        return render_to_response(self.template_dir,
-            {
+
+        return render(request, self.template_dir, {
                 'departments': departments
-            }, RequestContext(request))
+            })
 
 
 class AddDepartmentView(View):
@@ -57,10 +43,10 @@ class AddDepartmentView(View):
             if department_form.is_valid():
                 if department_form.save():
                     messages.success(request, "Успешно добавлено новое отделение")
-        return render_to_response(self.template_dir,
+        return render(request, self.template_dir,
         {
             'form': department_form,
-        }, RequestContext(request))
+        })
 
 
 class EditDepartmentView(View):
@@ -75,11 +61,11 @@ class EditDepartmentView(View):
                 if department_form.save():
                     messages.success(request, "Отделение успешно изменено")
 
-        return render_to_response(self.template_dir,
+        return render(request, self.template_dir,
         {
             'form': department_form,
             'dep_id':department.id
-        }, RequestContext(request))
+        })
 
 
 class DeleteDepartmentView(View):
@@ -110,11 +96,11 @@ class EmployeeView(View):
                 departments = Department.objects.filter(name__contains=search_form.cleaned_data['criteria_value'])
                 employees = Employee.objects.filter(Q(first_name__contains=search_form.cleaned_data['criteria_value']) | Q(department=departments))
 
-        return render_to_response(self.template_dir,
+        return render(request, self.template_dir,
             {
                 'employees': employees,
                 'form': search_form
-            }, RequestContext(request))
+            })
 
 
 class AddEmployeeView(View):
@@ -128,10 +114,10 @@ class AddEmployeeView(View):
                 if employee_form.save():
                     messages.success(request, "Успешно добавлен новый сотрудник")
 
-        return render_to_response(self.template_dir,
+        return render(request, self.template_dir,
         {
             'form': employee_form
-        }, RequestContext(request))
+        })
 
 
 class EditEmployeeView(View):
@@ -147,11 +133,11 @@ class EditEmployeeView(View):
                 if employee_form.save():
                     messages.success(request, "Успешно изменен сотрудник")
 
-        return render_to_response(self.template_dir,
+        return render(request, self.template_dir,
         {
             'emp_id': employee.id,
             'form': employee_form
-        }, RequestContext(request))
+        })
 
 
 class DeleteEmployeeView(View):
@@ -174,10 +160,10 @@ class AddTimelineView(View):
                 if timeline_form.save():
                     messages.success(request, "Успешно добавлено новое расписание")
 
-        return render_to_response(self.template_dir,
+        return render(request, self.template_dir,
         {
             'form': timeline_form
-        }, RequestContext(request))
+        })
 
 
 class TimelineView(View):
@@ -192,10 +178,10 @@ class TimelineView(View):
 
         timelines = Timeline.objects.all().order_by(type)
 
-        return render_to_response(self.template_dir,
+        return render(request, self.template_dir,
             {
                 'timelines': timelines
-            }, RequestContext(request))
+            })
 
 
 class EditTimelineView(View):
@@ -211,11 +197,11 @@ class EditTimelineView(View):
                 if timeline_form.save():
                     messages.success(request, "Успешно изменено расписание")
 
-        return render_to_response(self.template_dir,
+        return render(request, self.template_dir,
         {
             'timeline_id': timeline.id,
             'form': timeline_form
-        }, RequestContext(request))
+        })
 
 
 class DeleteTimelineView(View):
@@ -238,10 +224,10 @@ class AddEmployeeAttendanceView(View):
                 if empatt_form.save():
                     messages.success(request, "Успешно добавлено новое расписание")
 
-        return render_to_response(self.template_dir,
+        return render(request, self.template_dir,
         {
             'form': empatt_form
-        }, RequestContext(request))
+        })
 
 
 class EmployeeAttendanceSearchView(View):
@@ -265,8 +251,8 @@ class EmployeeAttendanceSearchView(View):
                     elif date_form.cleaned_data['attendance_type'] == 'absense':
                         response_data['absent_employee'] = Employee.objects.filter(department__exact=department_id).exclude(id__in=EmployeeAttendance.objects.filter(employee__department__exact=department_id, current_day__exact=str(date_search)).values_list('employee_id', flat=True))
 
-                    return render_to_response("stafftime/filter/absense.html",
-                    response_data, RequestContext(request))
+                    return render(request, "stafftime/filter/absense.html",
+                    response_data)
 
 
 class EmployeeAttendanceReportView(View):
@@ -284,8 +270,8 @@ class EmployeeAttendanceReportView(View):
                 department_id = request.POST['department']
                 response_data['late_employees'] = EmployeeAttendance.objects.filter(employee__department__timeline__start_time__isnull=False, employee__department__exact=department_id, current_day__month=date_search.month).extra(where=['"stafftime_employeeattendance"."arriving_time" > "stafftime_timeline"."start_time"'])
 
-        return render_to_response(self.template_dir,
-              response_data, RequestContext(request))
+        return render(request, self.template_dir,
+              response_data)
 
 
 class EmployeeAttendanceView(View):
@@ -311,11 +297,11 @@ class EmployeeAttendanceView(View):
 
         date_form = DateSearchForm()
 
-        return render_to_response(self.template_dir,
+        return render(request, self.template_dir,
             {
                 'empatts': empatts,
                 'form': date_form,
-            }, RequestContext(request))
+            })
 
 
 class EditEmployeeAttendanceView(View):
@@ -331,11 +317,11 @@ class EditEmployeeAttendanceView(View):
                 if empatt_form.save():
                     messages.success(request, "Успешно изменена запись")
 
-        return render_to_response(self.template_dir,
+        return render(self.template_dir,
         {
             'empatt_id': empatt.id,
             'form': empatt_form
-        }, RequestContext(request))
+        })
 
 
 class DeleteEmployeeAttendanceView(View):

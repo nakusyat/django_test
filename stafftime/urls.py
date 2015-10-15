@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from .views import IndexView, EditDepartmentView, EditEmployeeView, DeleteEmployeeView, DeleteDepartmentView, \
+from .views import EditDepartmentView, EditEmployeeView, DeleteEmployeeView, DeleteDepartmentView, \
     AddTimelineView, TimelineView, EditTimelineView, DeleteTimelineView, AddEmployeeAttendanceView, \
     EmployeeAttendanceView, EditEmployeeAttendanceView, DeleteEmployeeAttendanceView, EmployeeAttendanceSearchView, \
     EmployeeAttendanceReportView
